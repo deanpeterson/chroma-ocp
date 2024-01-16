@@ -1,5 +1,7 @@
 FROM python:3.10-slim-bookworm as builder
 
+USER 1001
+
 RUN apt-get update --fix-missing && apt-get install -y --fix-missing \
     build-essential \
     gcc \
@@ -32,8 +34,5 @@ EXPOSE 8000
 
 RUN chgrp -R 0 /usr/local && \
     chmod -R g=u /usr/local
-
-USER 1001
-RUN chown -R 1001:0 /usr/local
 
 CMD ["/docker_entrypoint.sh"]
