@@ -30,4 +30,10 @@ COPY ./ /chroma
 
 EXPOSE 8000
 
+RUN chgrp -R 0 /.local && \
+    chmod -R g=u /.local
+
+USER 1001
+RUN chown -R 1001:0 /.local
+
 CMD ["/docker_entrypoint.sh"]
